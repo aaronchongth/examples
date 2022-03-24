@@ -1,0 +1,8 @@
+<?xml version='1.0' ?>
+<launch>
+  <arg name="testing_word" default="" description="lorem ipsum"/>
+  <node pkg="examples_rclcpp_minimal_publisher" exec="publisher_lambda"
+    name="publisher_lambda" output="both">
+    <param name="testing_word" value="$(var testing_word)"/>
+  </node>
+</launch>

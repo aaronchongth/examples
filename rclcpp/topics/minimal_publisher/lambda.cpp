@@ -31,11 +31,13 @@ public:
   MinimalPublisher()
   : Node("minimal_publisher"), count_(0)
   {
+    word_ = this->declare_parameter("testing_word", "Hello, world! ");
+
     publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
     auto timer_callback =
       [this]() -> void {
         auto message = std_msgs::msg::String();
-        message.data = "Hello, world! " + std::to_string(this->count_++);
+        message.data = word_ + std::to_string(this->count_++);
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
         this->publisher_->publish(message);
       };
@@ -46,6 +48,7 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
   size_t count_;
+  std::string word_;
 };
 
 int main(int argc, char * argv[])

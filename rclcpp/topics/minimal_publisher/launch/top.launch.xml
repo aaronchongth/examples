@@ -1,0 +1,4 @@
+<?xml version='1.0' ?>
+<launch>
+  <include file="$(find-pkg-share examples_rclcpp_minimal_publisher)/bottom.launch.xml"/>
+</launch>
